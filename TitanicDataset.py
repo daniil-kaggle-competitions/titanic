@@ -6,13 +6,17 @@ import numpy as np
 pd.set_option("future.no_silent_downcasting", True)
 
 class TitanicDataset(Dataset):
-    def __init__(self, csv_file):
+    def __init__(self, csv_file, eval=False):
+        self.eval = eval
         self.dataframe = self.extract_data(pd.read_csv(csv_file))
 
     def extract_data(self, frame: pd.DataFrame) -> pd.DataFrame:
-        res = frame[["Pclass", "Sex", "Age", "Survived"]].copy()
+        if self.eval:
+            res = frame[["Pclass", "Sex", "Age", "PassengerId"]].copy()
+        else:
+            res = frame[["Pclass", "Sex", "Age", "Survived"]].copy()
         res["Sex"] = res["Sex"].replace(["male", "female"], [0, 1])
-        res["Age"] = res["Age"].fillna(float(res["Age"].mode()))
+        res["Age"] = res["Age"].fillna(float(res["Age"].mean()))
         return res
     
     def __len__(self):

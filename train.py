@@ -1,25 +1,10 @@
 from torch.utils.data import DataLoader, random_split
 from torch.optim import Adam
 from TitanicDataset import TitanicDataset
+from TitanicModel import TitanicModel
 import torch.nn as nn
-import torch.nn.functional as F
 import torch
 
-class TitanicModel(nn.Module):
-    def __init__(self):
-        super(TitanicModel, self).__init__()
-        self.stack = nn.Sequential(
-            nn.Linear(3, 8),
-            nn.Tanh(),
-            nn.Linear(8, 16),
-            nn.Tanh(),
-            nn.Linear(16, 32),
-            nn.Tanh(),
-            nn.Linear(32, 1)
-        )
-    
-    def forward(self, x):
-        return F.sigmoid(self.stack(x))
 
 def epoch(train_loader, model, loss_fn, optimizer):
     for i, data in enumerate(train_loader):

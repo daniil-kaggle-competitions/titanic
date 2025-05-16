@@ -17,8 +17,9 @@ class TitanicDataset(Dataset):
         else:
             res = frame[["Pclass", "Sex", "Age", "Survived"]].copy()
         res["Sex"] = res["Sex"].replace(["male", "female"], [0, 1])
+        res.insert(res.shape[1] - 1, "FamilySize", frame["SibSp"] + frame["Parch"])
 
-        imputer = KNNImputer(n_neighbors=5)
+        imputer = KNNImputer(n_neighbors=20)
         return imputer.fit_transform(res).astype(dtype=np.float32)
     
     def __len__(self):

@@ -5,7 +5,7 @@ class TitanicModel(nn.Module):
     def __init__(self):
         super(TitanicModel, self).__init__()
         self.stack = nn.Sequential(
-            nn.Linear(3, 8),
+            nn.Linear(4, 8),
             nn.Tanh(),
             nn.Linear(8, 16),
             nn.Tanh(),

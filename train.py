@@ -52,7 +52,7 @@ def main():
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
     validation_loader = DataLoader(validation_dataset, batch_size=32, shuffle=True)
 
-    train(train_loader, validation_loader, 50)
+    train(train_loader, validation_loader, 100)
     
 
 if __name__ == "__main__":

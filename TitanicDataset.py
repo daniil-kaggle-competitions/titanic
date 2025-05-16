@@ -15,7 +15,7 @@ class TitanicDataset(Dataset):
         if self.eval:
             res = frame[["Pclass", "Sex", "Age", "PassengerId"]].copy()
         else:
-            res = frame[["Pclass", "Sex", "Age", "Fare", "Embarked", "Survived"]].copy()
+            res = frame[["Pclass", "Sex", "Age", "Survived"]].copy()
         res["Sex"] = res["Sex"].replace(["male", "female"], [0, 1])
 
         imputer = KNNImputer(n_neighbors=5)
